@@ -2620,7 +2620,7 @@ overflow: hidden;
 /* Shared lightly stained cream paper for all content panels */
 body .post-outer-container, body #welcome-message, body .sidebar-container, body .dialog, body .overflow-popup, body .share-buttons, body .subscribe-popup {
 background-color: #f4e6c5 !important;
-background-image: url("/British-Composers/assets/da7af5caf722b0df71eb.webp") !important;
+background-image: url("/forgotten-british-composers-1850-1950/assets/da7af5caf722b0df71eb.webp") !important;
 background-size: 563px 697px !important;
 background-position: center !important;
 background-repeat: repeat !important;
@@ -2704,7 +2704,7 @@ body .svg-icon-24 { fill: #eee2cd; }
 body .Attribution { color: #eee2cd !important; }
 body .Attribution a { color: #eee2cd !important; }
 /* Seamless dark brown antique leather */
-html, body { background-color: #2c180e !important; background-image: url("/British-Composers/assets/8d62c88d8c4cb0070e23.webp") !important; background-size: 700px 700px !important; background-repeat: repeat !important; background-attachment: scroll !important; }
+html, body { background-color: #2c180e !important; background-image: url("/forgotten-british-composers-1850-1950/assets/8d62c88d8c4cb0070e23.webp") !important; background-size: 700px 700px !important; background-repeat: repeat !important; background-attachment: scroll !important; }
 /* Black and gold concert hall frame */
 #Header1 .header-widget h1 { box-sizing: border-box; border: 5px solid #111 !important; box-shadow: 0 0 0 2px #c4a052, inset 0 0 0 2px #c4a052, 0 5px 14px rgba(0,0,0,.35) !important; }
 .sidebar-container #BlogArchive1 { display: none !important; }

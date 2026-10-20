@@ -6,7 +6,7 @@ A static GitHub Pages edition of the Forgotten Composers Blogger site, copied on
 
 In repository Settings → Pages, select **Deploy from a branch**, **main**, and **/(root)**.
 
-Expected site address: https://martinrobertwalsh.github.io/British-Composers/
+Expected site address: https://martinrobertwalsh.github.io/forgotten-british-composers-1850-1950/
 
 ## Updating
 
