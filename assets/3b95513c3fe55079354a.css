@@ -1,0 +1,12 @@
+
+#Header1 .header-widget h1 {background:none !important; min-height:90px !important; padding:16px 12px !important; border:0 !important; box-shadow:none !important;}
+#composer-carousel {width:80%; box-sizing:border-box; margin-left:auto !important; margin-right:auto !important;background:#111; color:#fff; border:3.2px solid #333; box-shadow:0 0 0 0.8px #aaa; margin:0 0 9.6px; overflow:hidden;}
+#composer-carousel .portrait-window {overflow-x:auto; scrollbar-width:none; touch-action:pan-x;}
+#composer-carousel .portrait-window::-webkit-scrollbar {display:none;}
+#composer-carousel .portrait-track {display:flex; width:max-content; gap:9.6px; padding:8px 4.8px 0;}
+#composer-carousel figure {flex:none; width:115.2px; margin:0;}
+#composer-carousel img {width:115.2px; height:115.2px; display:block; object-fit:cover; filter:grayscale(1);}
+#composer-carousel figcaption {font:11.2px/1.4 Georgia,serif; color:#fff; text-align:center; padding:5.6px 0;}
+#composer-carousel .portrait-controls {display:flex; gap:8px; justify-content:center; padding:3.2px 0 7.2px;}
+#composer-carousel button {background:#222; border:0.8px solid #aaa; color:#fff; padding:3.2px 9.6px; cursor:pointer; font:10.4px Georgia,serif;}
+#composer-carousel button:focus-visible {outline:1.6px solid white; outline-offset:1.6px;}

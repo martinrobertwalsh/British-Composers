@@ -1,0 +1,8 @@
+.centered-top-container {position:relative!important;}
+.post-outer-container {opacity:1!important;}
+body:not(.item-view) .Blog .post-outer-container {cursor:pointer;}
+.svg-icon-24 {width:24px;height:24px;}
+.post-share-buttons,.search,.search-action,.hamburger-menu,.sidebar-container {display:none!important;}
+dialog::backdrop {background:rgba(0,0,0,.65);}
+audio {max-width:100%;}
+button:focus-visible,a:focus-visible {outline:2px solid #ddd;outline-offset:3px;}
