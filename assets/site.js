@@ -20,7 +20,7 @@ if (carousel) {
   const originalWidth = track.scrollWidth;
   Array.from(track.children).forEach(figure => { const copy = figure.cloneNode(true); copy.setAttribute('aria-hidden', 'true'); track.append(copy); });
   const [previous, toggle, next] = carousel.querySelectorAll('button');
-  let paused = matchMedia('(prefers-reduced-motion: reduce)').matches, hover = false, last = 0, resume = 0;
+  let paused = matchMedia('(prefers-reduced-motion: reduce)').matches, hover = false, last = 0, resume = 0, position = 0;
   const sync = () => { toggle.textContent = paused ? 'Play' : 'Pause'; toggle.setAttribute('aria-label', (paused ? 'Play' : 'Pause') + ' portrait scrolling'); };
   sync(); toggle.addEventListener('click', () => { paused = !paused; sync(); });
   previous.addEventListener('click', () => { viewport.scrollLeft -= 125; resume = performance.now()+2000; });
@@ -29,7 +29,8 @@ if (carousel) {
   carousel.addEventListener('pointerleave', () => hover = false);
   function tick(now) {
     const delta = last ? Math.min(now-last, 60) : 0; last = now;
-    if (!paused && !hover && now > resume && !document.hidden) { viewport.scrollLeft += delta*0.024; if(viewport.scrollLeft >= originalWidth) viewport.scrollLeft -= originalWidth; }
+    if (!paused && !hover && now > resume && !document.hidden) { position += delta*0.024; if(position >= originalWidth) position -= originalWidth; viewport.scrollLeft = position; }
+    else position = viewport.scrollLeft;
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
