@@ -1,4 +1,16 @@
 document.querySelectorAll('[data-href]').forEach(button => button.addEventListener('click', () => location.href = button.dataset.href));
+document.querySelectorAll('[data-dialog]').forEach(button => button.addEventListener('click', () => document.getElementById(button.dataset.dialog)?.showModal()));
+document.querySelectorAll('[data-share-url]').forEach(button => button.addEventListener('click', event => {
+  event.preventDefault(); event.stopPropagation();
+  const url = new URL(button.dataset.shareUrl, location.origin).href;
+  if (navigator.share) navigator.share({title: button.dataset.shareTitle, url}).catch(() => {});
+  else window.prompt('Copy this link to share:', url);
+}));
+document.addEventListener('play', event => {
+  if (event.target instanceof HTMLMediaElement) {
+    document.querySelectorAll('audio,video').forEach(media => { if (media !== event.target) media.pause(); });
+  }
+}, true);
 const archiveButton = document.getElementById('archive-tab-button');
 archiveButton?.addEventListener('click', () => document.getElementById('archive-tab-dialog')?.showModal());
 document.querySelectorAll('dialog').forEach(dialog => {

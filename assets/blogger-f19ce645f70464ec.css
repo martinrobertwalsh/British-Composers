@@ -1,0 +1,1 @@
+body:not(.item-view) .post-outer-container:has(.walter-preview-portrait) .post-body {display:flow-root;}
