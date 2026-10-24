@@ -17,7 +17,7 @@ archiveButton?.addEventListener('click', () => document.getElementById('archive-
 // The exported DOM already contains the complete article and its audio players.
 document.querySelectorAll('audio').forEach(audio => {
   const label = [...audio.parentElement.querySelectorAll('span,b,strong')]
-    .find(el => /^(AUDIO\s*:?|FULL SYMPHONY)$/i.test(el.textContent.trim()));
+    .find(el => /^(AUDIO\s*:?|FULL SYMPHONY|FULL SINFONIA)$/i.test(el.textContent.trim()));
   if (!label) return;
   label.setAttribute('role', 'button'); label.tabIndex = 0;
   const sync = () => {
@@ -35,6 +35,24 @@ document.querySelectorAll('.macfarren-movement-jumps').forEach(nav => {
   nav.querySelectorAll('a').forEach((link, i) => link.addEventListener('click', e => {
     e.preventDefault(); audio.currentTime = [0,579.82,1034.54,1254.07][i]; audio.play().catch(() => {});
   }));
+});
+document.querySelectorAll('.morris-full-sinfonia-jumps').forEach(nav => {
+  const audio = nav.closest('.morris-full-sinfonia-box')?.querySelector('audio');
+  if (!audio) return;
+  nav.querySelectorAll('a').forEach((link, i) => link.addEventListener('click', e => {
+    e.preventDefault();
+    audio.currentTime = Number(link.dataset.start ?? [0,237.579592,524.739592,759.18449][i]);
+    audio.play().catch(() => {});
+  }));
+});
+document.querySelectorAll('a[href="#macfarren-full-audio"]').forEach(link => {
+  link.addEventListener('click', event => {
+    const target = document.getElementById('macfarren-full-audio');
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({behavior:'instant',block:'center'});
+    history.replaceState(null,'','#macfarren-full-audio');
+  });
 });
 const contactPopup = document.getElementById('contact-popup');
 document.getElementById('contact-popup-button')?.addEventListener('click', () => contactPopup?.showModal());

@@ -1,0 +1,1 @@
+html:has(audio){filter:none!important;-webkit-filter:none!important;}html:has(audio) .post-outer-container,html:has(audio) #home-macfarren-full{background-color:#fafafa!important;background-blend-mode:normal,luminosity!important;}body .audio-labelled-row span,body .morris-audio-label,body .audio-label{color:#000!important;}
