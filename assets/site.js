@@ -13,6 +13,39 @@ document.addEventListener('play', event => {
 }, true);
 const archiveButton = document.getElementById('archive-tab-button');
 archiveButton?.addEventListener('click', () => document.getElementById('archive-tab-dialog')?.showModal());
+
+// The exported DOM already contains the complete article and its audio players.
+document.querySelectorAll('audio').forEach(audio => {
+  const label = [...audio.parentElement.querySelectorAll('span,b,strong')]
+    .find(el => /^(AUDIO\s*:?|FULL SYMPHONY)$/i.test(el.textContent.trim()));
+  if (!label) return;
+  label.setAttribute('role', 'button'); label.tabIndex = 0;
+  const sync = () => {
+    label.setAttribute('aria-label', `${audio.paused ? 'Play' : 'Pause'} ${label.textContent.includes('FULL') ? 'full symphony' : 'audio'}`);
+    label.setAttribute('aria-pressed', String(!audio.paused));
+  };
+  const toggle = () => audio.paused ? audio.play().catch(sync) : audio.pause();
+  label.addEventListener('click', toggle);
+  label.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  ['play','pause','ended'].forEach(event => audio.addEventListener(event, sync)); sync();
+});
+document.querySelectorAll('.macfarren-movement-jumps').forEach(nav => {
+  const audio = nav.parentElement.querySelector('.macfarren-full-symphony audio');
+  if (!audio) return;
+  nav.querySelectorAll('a').forEach((link, i) => link.addEventListener('click', e => {
+    e.preventDefault(); audio.currentTime = [0,579.82,1034.54,1254.07][i]; audio.play().catch(() => {});
+  }));
+});
+const contactPopup = document.getElementById('contact-popup');
+document.getElementById('contact-popup-button')?.addEventListener('click', () => contactPopup?.showModal());
+document.getElementById('contact-popup-close')?.addEventListener('click', () => contactPopup?.close());
+document.querySelectorAll('button').forEach(button => {
+  if (button.textContent.trim().toLowerCase() === 'see dates') button.addEventListener('click', () => document.getElementById('macfarren-dates-dialog')?.showModal());
+});
+document.querySelectorAll('button[onclick]').forEach(button => {
+  const target = button.getAttribute('onclick').match(/getElementById\(['"]([^'"]+)['"]\)/)?.[1];
+  if (target) button.addEventListener('click', () => document.getElementById(target)?.showModal());
+});
 document.querySelectorAll('dialog').forEach(dialog => {
   dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
 });
