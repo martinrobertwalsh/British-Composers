@@ -69,7 +69,7 @@ document.querySelectorAll('dialog').forEach(dialog => {
 });
 if (!document.body.classList.contains('item-view')) {
   document.querySelectorAll('.Blog .post-outer-container').forEach(card => {
-    const link = card.querySelector('.post-title a');
+    const link = card.querySelector('.post-title a[href]');
     if (!link) return;
     card.tabIndex = 0; card.setAttribute('role', 'link'); card.setAttribute('aria-label', link.textContent.trim());
     card.addEventListener('click', event => { if (!event.target.closest('a,button,input,audio') && !getSelection().toString()) location.href = link.href; });
