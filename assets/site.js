@@ -1,3 +1,16 @@
+// Invisible homepage analytics. The standard GoatCounter opt-out is browser-specific.
+(() => {
+  const home = '/forgotten-british-composers-1850-1950/';
+  if (location.hostname !== 'martinrobertwalsh.github.io' || ![home, home + 'index.html'].includes(location.pathname)) return;
+  try { if (localStorage.getItem('skipgc') === 't') return; } catch (_) {}
+  window.goatcounter = Object.assign(window.goatcounter || {}, {path: home, no_events: true});
+  const counter = document.createElement('script');
+  counter.async = true;
+  counter.src = 'https://gc.zgo.at/count.js';
+  counter.dataset.goatcounter = 'https://britishcomposers1850-1950.goatcounter.com/count';
+  document.head.appendChild(counter);
+})();
+
 document.querySelectorAll('[data-href]').forEach(button => button.addEventListener('click', () => location.href = button.dataset.href));
 document.querySelectorAll('[data-dialog]').forEach(button => button.addEventListener('click', () => document.getElementById(button.dataset.dialog)?.showModal()));
 document.querySelectorAll('[data-share-url]').forEach(button => button.addEventListener('click', event => {

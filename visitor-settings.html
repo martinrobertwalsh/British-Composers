@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Exclude my visits</title><style>body{font:18px/1.5 Georgia,serif;background:#303030;color:#fff;max-width:640px;margin:70px auto;padding:24px}button,a{font:inherit}button{padding:10px 16px;cursor:pointer}a{color:#fff}#status{margin:24px 0}</style></head><body><h1>Exclude my visits</h1><p>Use this on each browser or device you use to visit your website. Your choice stays in this browser until its site data is cleared.</p><button id="exclude" type="button">Ignore my visits in this browser</button><p id="status" role="status"></p><p><a href="./">Return to the homepage</a></p><script>
+const status = document.getElementById('status');
+function showStatus(){try{status.textContent=localStorage.getItem('skipgc')==='t'?'Your visits are excluded in this browser.':'Your visits are currently counted in this browser.';}catch(e){status.textContent='Browser storage is unavailable. Exclusion cannot be saved.';}}
+document.getElementById('exclude').addEventListener('click',()=>{try{localStorage.setItem('skipgc','t');showStatus();}catch(e){status.textContent='Browser storage is unavailable. Exclusion cannot be saved.';}});
+showStatus();
+</script></body></html>
