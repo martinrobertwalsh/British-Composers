@@ -94,7 +94,7 @@ document.querySelectorAll('.macfarren-movement-jumps').forEach(nav => {
   const audio = nav.parentElement.querySelector('.macfarren-full-symphony audio');
   if (!audio) return;
   nav.querySelectorAll('a').forEach((link, i) => link.addEventListener('click', e => {
-    e.preventDefault(); audio.currentTime = [0,578.82,1032.54,1251.07][i]; audio.play().catch(() => {});
+    e.preventDefault(); audio.currentTime = [0,578.142041,1030.896327,1247.921633][i]; audio.play().catch(() => {});
   }));
 });
 document.querySelectorAll('.morris-full-sinfonia-jumps').forEach(nav => {
