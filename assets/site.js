@@ -9,7 +9,7 @@
             if (link.dataset.datesImage && !link.querySelector('.dates-image-caption')) {
         const caption = document.createElement('span');
         caption.className = 'dates-image-caption'; caption.textContent = 'click to enlarge';
-        caption.style.cssText = 'display:block;text-align:center;font-size:12px;line-height:1.3;font-weight:normal;font-style:normal;margin-top:4px;color:#333;';
+        caption.style.cssText = 'display:block;text-align:center;font-size:10px!important;line-height:1.3!important;font-weight:normal;font-style:normal;margin-top:4px;color:#333;';
         link.append(caption);
       }
       link.style.cursor = link.dataset.datesImage ? 'zoom-in' : 'default'; link.setAttribute('data-image-disabled', 'true');
