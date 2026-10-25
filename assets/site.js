@@ -6,6 +6,12 @@
       if (!link.querySelector('img') || !/\.(?:jpe?g|png|webp|gif)(?:[?#]|$)/i.test(link.getAttribute('href') || '')) return;
       if (/\/Dates\.jpg(?:[?#]|$)/i.test(link.href)) { link.dataset.datesImage = link.href; link.setAttribute('role', 'button'); link.tabIndex = 0; link.setAttribute('aria-label', 'Enlarge performance dates image'); }
       link.removeAttribute('href'); link.removeAttribute('target'); link.removeAttribute('title');
+            if (link.dataset.datesImage && !link.querySelector('.dates-image-caption')) {
+        const caption = document.createElement('span');
+        caption.className = 'dates-image-caption'; caption.textContent = 'click to enlarge';
+        caption.style.cssText = 'display:block;text-align:center;font-size:12px;line-height:1.3;font-weight:normal;font-style:normal;margin-top:4px;color:#333;';
+        link.append(caption);
+      }
       link.style.cursor = link.dataset.datesImage ? 'zoom-in' : 'default'; link.setAttribute('data-image-disabled', 'true');
     });
   }
