@@ -33,7 +33,7 @@ document.querySelectorAll('.macfarren-movement-jumps').forEach(nav => {
   const audio = nav.parentElement.querySelector('.macfarren-full-symphony audio');
   if (!audio) return;
   nav.querySelectorAll('a').forEach((link, i) => link.addEventListener('click', e => {
-    e.preventDefault(); audio.currentTime = [0,579.82,1034.54,1254.07][i]; audio.play().catch(() => {});
+    e.preventDefault(); audio.currentTime = [0,578.82,1032.54,1251.07][i]; audio.play().catch(() => {});
   }));
 });
 document.querySelectorAll('.morris-full-sinfonia-jumps').forEach(nav => {
