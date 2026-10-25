@@ -1,3 +1,34 @@
+// Keep image enlargement on the page with an obvious, keyboard-accessible exit.
+(() => {
+  let viewer, enlarged, closeButton, trigger;
+  function createViewer() {
+    const style = document.createElement('style');
+    style.textContent = '#score-image-viewer{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;max-width:none!important;max-height:none!important;margin:0!important;padding:60px 20px 20px!important;box-sizing:border-box!important;border:0!important;border-radius:0!important;background:rgba(0,0,0,.94)!important;overflow:auto!important;}#score-image-viewer::backdrop{background:rgba(0,0,0,.85)}#score-image-viewer img{display:block!important;max-width:100%!important;max-height:calc(100dvh - 85px)!important;width:auto!important;height:auto!important;object-fit:contain!important;margin:auto!important;filter:none!important;transform:none!important;}#score-image-viewer-close{position:fixed!important;top:12px!important;right:16px!important;z-index:2!important;width:44px!important;height:44px!important;padding:0!important;border:2px solid #fff!important;border-radius:50%!important;background:#111!important;color:#fff!important;font:36px/38px Arial,sans-serif!important;cursor:pointer!important;}';
+    document.head.appendChild(style);
+    viewer = document.createElement('dialog');
+    viewer.id = 'score-image-viewer';
+    viewer.setAttribute('aria-label', 'Enlarged image');
+    closeButton = document.createElement('button');
+    closeButton.id = 'score-image-viewer-close'; closeButton.type = 'button';
+    closeButton.textContent = '×'; closeButton.setAttribute('aria-label', 'Close enlarged image');
+    enlarged = document.createElement('img');
+    viewer.append(closeButton, enlarged); document.body.appendChild(viewer);
+    closeButton.addEventListener('click', () => viewer.close());
+    viewer.addEventListener('click', event => { if (event.target === viewer) viewer.close(); });
+    viewer.addEventListener('close', () => trigger?.focus({preventScroll: true}));
+  }
+  document.addEventListener('click', event => {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest('a[href]');
+    const image = link?.querySelector('img');
+    if (!image || !link.closest('.post-body,[id^="post-body-"]') || !/\.(?:jpe?g|png|webp|gif)(?:[?#]|$)/i.test(link.href)) return;
+    event.preventDefault(); event.stopImmediatePropagation();
+    if (!viewer) createViewer();
+    trigger = link; enlarged.src = link.href; enlarged.alt = image.alt || 'Enlarged image';
+    viewer.showModal(); closeButton.focus();
+  }, true);
+})();
+
 // Invisible homepage analytics. The standard GoatCounter opt-out is browser-specific.
 (() => {
   const home = '/forgotten-british-composers-1850-1950/';
