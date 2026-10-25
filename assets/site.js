@@ -4,11 +4,34 @@
   function disableImageLinks() {
     document.querySelectorAll(selector).forEach(link => {
       if (!link.querySelector('img') || !/\.(?:jpe?g|png|webp|gif)(?:[?#]|$)/i.test(link.getAttribute('href') || '')) return;
+      if (/\/Dates\.jpg(?:[?#]|$)/i.test(link.href)) { link.dataset.datesImage = link.href; link.setAttribute('role', 'button'); link.tabIndex = 0; link.setAttribute('aria-label', 'Enlarge performance dates image'); }
       link.removeAttribute('href'); link.removeAttribute('target'); link.removeAttribute('title');
-      link.style.cursor = 'default'; link.setAttribute('data-image-disabled', 'true');
+      link.style.cursor = link.dataset.datesImage ? 'zoom-in' : 'default'; link.setAttribute('data-image-disabled', 'true');
     });
   }
+  function openDatesImage(link) {
+    let popup = document.getElementById('dates-image-popup');
+    if (!popup) {
+      popup = document.createElement('dialog'); popup.id = 'dates-image-popup';
+      popup.setAttribute('aria-label', 'Performance dates image');
+      popup.style.cssText = 'box-sizing:border-box;width:calc(100% - 40px);max-width:850px;max-height:90vh;padding:12px;background:#fff;border:2px solid #765b37;border-radius:6px;overflow:auto;';
+      const close = document.createElement('button'); close.type = 'button'; close.textContent = '×'; close.setAttribute('aria-label','Close performance dates image');
+      close.style.cssText = 'display:block;position:sticky;top:0;z-index:2;width:44px;height:44px;padding:0;background:#fff;color:#111;border:1px solid #555;font:32px Arial;cursor:pointer;';
+      const img = document.createElement('img'); img.alt = 'Performance dates noted inside Walter Macfarren’s symphony score';
+      img.style.cssText = 'display:block;width:100%;height:auto;max-width:100%;filter:none;transform:none;';
+      popup.append(close,img); document.body.append(popup);
+      close.addEventListener('click',()=>popup.close());
+    }
+    popup.querySelector('img').src = link.dataset.datesImage;
+    popup.showModal(); popup.querySelector('button').focus();
+  }
+  document.addEventListener('keydown', event => {
+    const link = event.target.closest('[data-dates-image]');
+    if (link && ['Enter',' '].includes(event.key)) { event.preventDefault(); openDatesImage(link); }
+  });
   document.addEventListener('click', event => {
+    const dates = event.target.closest('[data-dates-image]');
+    if (dates) { event.preventDefault(); event.stopImmediatePropagation(); openDatesImage(dates); return; }
     if (event.target.closest('[data-image-disabled]') || event.target.closest('.post-body img,[id^="post-body-"] img')) {
       event.preventDefault(); event.stopImmediatePropagation();
     }
